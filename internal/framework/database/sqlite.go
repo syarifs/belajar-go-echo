@@ -6,6 +6,6 @@ import (
 )
 
 func initSQLite() (db *gorm.DB, err error) {
-	db, err = gorm.Open(sqlite.Open("data.db"), &gorm.Config{})
+	db, err = gorm.Open(sqlite.Open("./test_db/data.db"), &gorm.Config{})
 	return
 }

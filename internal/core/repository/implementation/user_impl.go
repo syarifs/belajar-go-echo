@@ -25,7 +25,7 @@ func (repo userRepository) Create(user models.User) (err error) {
 }
 
 func (repo userRepository) Login(user models.User) (err error) {
-	err = repo.db.Where("email = ?", user.Email).First(&models.User{}).Error
+	err = repo.db.Where("email = ? AND password = ?", user.Email, user.Password).First(&models.User{}).Error
 	return
 }
 

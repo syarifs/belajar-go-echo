@@ -2,9 +2,13 @@ package database
 
 import "gorm.io/gorm"
 
-func InitDatabase() (db *gorm.DB) {
+func InitDatabase(driver string) (db *gorm.DB) {
 	var err error
-	db, err = initSQLite()
+	if driver == "mysql" {
+		db, err = initMySQL()
+	} else if driver == "sqlite" {
+		db, err = initSQLite()
+	}
 	if err != nil {
 		panic(err)
 	}

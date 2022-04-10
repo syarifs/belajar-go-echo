@@ -56,7 +56,15 @@ func (ucon UserController) Login(c echo.Context) error {
 			"error": err.Error(),
 		})
 	} else {
-		token, _ := middleware.CreateToken(user.Email, user.Password)
+		token, err := middleware.CreateToken(user.Email)
+
+		if err != nil {
+			return c.JSON(http.StatusInternalServerError, echo.Map{
+				"message": "Error",
+				"error": err,
+			})
+		}
+
 		return c.JSON(http.StatusOK, echo.Map{
 			"message": "Logged In",
 			"data": user,

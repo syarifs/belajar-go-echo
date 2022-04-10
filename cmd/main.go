@@ -12,7 +12,7 @@ import (
 )
 
 func main() {
-	db := database.InitDatabase()
+	db := database.InitDatabase("mysql")
 	userRepo := implementation.NewUserRepository(db)
 	userService := service.NewUserService(userRepo)
 	userController := controller.NewUserController(userService)
