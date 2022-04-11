@@ -8,7 +8,10 @@ import (
 )
 
 func initMySQL() (db *gorm.DB, err error) {
-	dsn := os.Getenv("MYSQL_DSN")
-	db, err = gorm.Open(mysql.Open(dsn), &gorm.Config{})
-	return
+		dsn, avail := os.LookupEnv("MYSQL_DSN")
+		if !avail {
+				dsn = "root:animelovers@tcp(localhost:3306)/crud_go?charset=utf8&parseTime=True&loc=Local"
+		}
+		db, err = gorm.Open(mysql.Open(dsn), &gorm.Config{})
+		return
 }

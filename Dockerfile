@@ -1,18 +1,12 @@
-FROM golang:1.18
+FROM golang:1.18 as build-env
 
-RUN mkdir /app
-WORKDIR /app
+WORKDIR /go/src/app
+ADD . /go/src/app
 
-COPY go.mod .
-COPY go.sum .
+RUN go get -d -v ./...
 
-RUN go mod download
+RUN go build -o /go/bin/app cmd/main.go
 
-COPY . .
-
-RUN go build cmd/main.go
-
-EXPOSE 8080
-
-RUN mv main /usr/local/bin/go-echo-server
-CMD ["go-echo-server"]
+FROM gcr.io/distroless/base
+COPY --from=build-env /go/bin/app /
+CMD ["/app"]
