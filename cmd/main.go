@@ -7,6 +7,7 @@ import (
 	"belajar-go-echo/internal/framework/routes"
 	"belajar-go-echo/internal/framework/transport/controller"
 	"belajar-go-echo/internal/framework/transport/middleware"
+	"os"
 
 	"github.com/labstack/echo/v4"
 )
@@ -20,5 +21,5 @@ func main() {
 	e := echo.New()
 	middleware.Logging(e)
 	routes.NewUserRoutes(e, userController, middleware.JWT())
-	e.Start(":8080")
+	e.Start(":" + os.Getenv("PORT"))
 }
