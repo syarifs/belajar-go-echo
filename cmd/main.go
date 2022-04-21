@@ -1,7 +1,7 @@
 package main
 
 import (
-	"belajar-go-echo/internal/core/repository/implementation"
+	"belajar-go-echo/internal/framework/repository/implementation"
 	"belajar-go-echo/internal/core/service"
 	"belajar-go-echo/internal/framework/database"
 	"belajar-go-echo/internal/framework/routes"
